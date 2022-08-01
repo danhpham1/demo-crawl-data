@@ -22,4 +22,6 @@ app.get("/",async (req,res)=>{
     }
 })
 
-app.listen(9300);
+app.listen(9300,() => {
+    console.log("server start")
+});

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        td {
+            border: 0.5px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- record -->
+    <% for( let index=0; index < gameLists.length; index++ ) { %>
+        <table style="margin-bottom: 30px;">
+            <tr>
+                <td><%= gameLists[index].game.TIMER %></td>
+                <td>Handicap</td>
+                <td>Goals O/U</td>
+                <td>1 X 2</td>
+                <td>1 X 2 1st Half</td>
+                <td>Handicap 1st Half</td>
+                <td>Goals O/U 1st Half</td>
+                <td>NextGoal</td>
+                <td>Both Teams to Score</td>
+            </tr>
+            <tr>
+                <td><%= gameLists[index].game.SCORE_H %> <%= gameLists[index].game.TEAM_H %></td>
+                <td><%= gameLists[index].game.IOR_REH %></td>
+                <td><%= gameLists[index].game.IOR_ROUC %></td>
+                <td><%= gameLists[index].game.IOR_RMH %></td>
+                <td><%= gameLists[index].game.IOR_HRMH %></td>
+                <td><%= gameLists[index].game.IOR_HREH %></td>
+                <td><%= gameLists[index].game.IOR_HROUC %></td>
+                <td><%= gameLists[index].game.IOR_RGH %></td>
+                <td><%= gameLists[index].game.IOR_RTSY %></td>
+            </tr>
+            <tr>
+                <td><%= gameLists[index].game.SCORE_C %> <%= gameLists[index].game.TEAM_C %></td>
+                <td><%= gameLists[index].game.IOR_REC %></td>
+                <td><%= gameLists[index].game.IOR_ROUH %></td>
+                <td><%= gameLists[index].game.IOR_RMC %></td>
+                <td><%= gameLists[index].game.IOR_HRMC %></td>
+                <td><%= gameLists[index].game.IOR_HREC %></td>
+                <td><%= gameLists[index].game.IOR_HROUH %></td>
+                <td><%= gameLists[index].game.IOR_RGC %></td>
+                <td><%= gameLists[index].game.IOR_RTSN %></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><%= gameLists[index].game.IOR_RMN %></td>
+                <td><%= gameLists[index].game.IOR_HRMN %></td>
+                <td></td>
+                <td></td>
+                <td><%= gameLists[index].game.IOR_RGN %></td>
+                <td></td>
+            </tr>
+        </table>
+        <% } %>
+            <!--  -->
+</body>
+
+</html>

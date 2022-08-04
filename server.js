@@ -6,22 +6,29 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.get("/",async (req,res)=>{
+
+
+app.get("/", async (req, res) => {
+    await mongoose.connect("mongodb+srv://danh:hanhphucao@clusterblog.sbxju.mongodb.net/gamelist?retryWrites=true&w=majority",
+        {
+            useNewUrlParser: true,
+        },
+    )
     try {
-        await mongoose.connect("mongodb+srv://danh:hanhphucao@clusterblog.sbxju.mongodb.net/gamelist?retryWrites=true&w=majority",
-            {
-                useNewUrlParser: true,
-            },
-        )
-        const gameListCollection = mongoose.connection.db.collection('gamelist');
-        const gameLists = await gameListCollection.find({}).toArray();
-        console.log(gameLists[1].data)
-        res.render('index',{gameLists: gameLists.length > 0 ? gameLists[gameLists.length -1].data : []});
+        res.render('index');
     } catch (error) {
         console.log(error);
     }
 })
 
-app.listen(process.env.PORT || 9300,() => {
+app.get("/data", async (req, res) => {
+    const gameListCollection = mongoose.connection.db.collection('gamelist');
+    const gameLists = await gameListCollection.find({}).toArray();
+    res.json({
+        data: gameLists.length > 0 ? gameLists[gameLists.length - 1] : []
+    })
+})
+
+app.listen(process.env.PORT || 9300, () => {
     console.log("server start")
 });

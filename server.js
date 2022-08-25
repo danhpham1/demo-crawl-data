@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 
 
 app.get("/", async (req, res) => {
-    await mongoose.connect("mongodb+srv://danh:hanhphucao@clusterblog.sbxju.mongodb.net/gamelist?retryWrites=true&w=majority",
+    await mongoose.connect("mongodb://localhost:27017/pet",
         {
             useNewUrlParser: true,
         },
@@ -22,10 +22,10 @@ app.get("/", async (req, res) => {
 })
 
 app.get("/data", async (req, res) => {
-    const gameListCollection = mongoose.connection.db.collection('gamelist');
+    const gameListCollection = mongoose.connection.db.collection('pet');
     const gameLists = await gameListCollection.find({}).toArray();
     res.json({
-        data: gameLists.length > 0 ? gameLists[gameLists.length - 1] : []
+        data: gameLists.length > 0 ? gameLists : []
     })
 })
 

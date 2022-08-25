@@ -22,23 +22,113 @@
 
 <body>
     <div id="table-data">
-
     </div>
     <script>
         $(document).ready(async function () {
             const printData = async () => {
                 while (true) {
                     const result = await axios.get('/data');
-                    let html = ''
-                    if (result.data.data.data) {
-                        if (result.data.data.data.length > 0) {
-                            for (let i = 0; i < result.data.data.data.length; i++) {
-                                html += `<table style="margin-bottom: 30px;"><tr><td>${result.data.data.data[i].game.TIMER}</td><td>Handicap</td><td>Goals O/U</td><td>1 X 2</td><td>1 X 2 1st Half</td><td>Handicap 1st Half</td><td>Goals O/U 1st Half</td><td>NextGoal</td><td>Both Teams to Score</td></tr><tr><td>${result.data.data.data[i].game.SCORE_H}${result.data.data.data[i].game.TEAM_H}</td><td>${result.data.data.data[i].game.IOR_REH}</td><td>${result.data.data.data[i].game.IOR_ROUC}</td><td>${result.data.data.data[i].game.IOR_RMH}</td><td>${result.data.data.data[i].game.IOR_HRMH}</td><td>${result.data.data.data[i].game.IOR_HREH}</td><td>${result.data.data.data[i].game.IOR_HROUC}</td><td>${result.data.data.data[i].game.IOR_RGH}</td><td>${result.data.data.data[i].game.IOR_RTSY}</td></tr><tr><td>${result.data.data.data[i].game.SCORE_C}${result.data.data.data[i].game.TEAM_C}</td><td>${result.data.data.data[i].game.IOR_REC}</td><td>${result.data.data.data[i].game.IOR_ROUH}</td><td>${result.data.data.data[i].game.IOR_RMC}</td><td>${result.data.data.data[i].game.IOR_HRMC}</td><td>${result.data.data.data[i].game.IOR_HREC}</td><td>${result.data.data.data[i].game.IOR_HROUH}</td><td>${result.data.data.data[i].game.IOR_RGC}</td><td>${result.data.data.data[i].game.IOR_RTSN}</td></tr><tr><td></td><td></td><td></td><td>${result.data.data.data[i].game.IOR_RMN}</td><td>${result.data.data.data[i].game.IOR_HRMN}</td><td></td><td></td><td>${result.data.data.data[i].game.IOR_RGN}</td><td></td></tr></table>`;
-                            }
-                            $("#table-data").html('');
-                            $("#table-data").html(html);
+                    let html = ``;
+                    if (result.data.data) {
+                        if (result.data.data.length > 0) {
+                            result.data.data.map(match => {
+                                html += `<table><tr><td>Info Match</td><td>Full Match</td><td>Firs Match</td></tr><tr>`;
+                                if (match.infomatch) {
+                                    html += `
+                                        <td>
+                                            nameaway: ${match.infomatch.nameaway} <br/>
+                                            namehome: ${match.infomatch.namehome} <br/>
+                                            score: ${match.infomatch.score} <br/>
+                                            time: ${match.infomatch.time} <br/>
+                                        </td>
+                                `;
+                                }
+                                if (match.fullmatch) {
+                                    html += `<td>`
+                                    if (match.fullmatch['1X2']) {
+                                        html += `
+                                                1X2:<br/>
+                                                1: ${match.fullmatch['1X2']['1']}<br/>
+                                                2: ${match.fullmatch['1X2']['2']}<br/>
+                                                X: ${match.fullmatch['1X2']['X']}<br/><br/><br/>
+                                    `;
+                                    }
+                                    if (match.fullmatch.hdp.length > 0) {
+                                        html += `HDP:<br/>`
+                                        match.fullmatch.hdp.map(hdp => {
+                                            html += `
+                                            <ul>
+                                                <li>Goal: ${hdp.goal}</li>
+                                                <li>oddaway: ${hdp.oddaway}</li>
+                                                <li>oddhome: ${hdp.oddhome}</li>
+                                            </ul>
+                                            <br/>
+                                        `;
+                                        })
+                                    }
+                                    if (match.fullmatch.ou.length > 0) {
+                                        html += `<br/><br/>OU:<br/>`
+                                        match.fullmatch.ou.map(ou => {
+                                            html += `
+                                            <ul>
+                                                <li>Goal: ${ou.goal}</li>
+                                                <li>oddaway: ${ou.oddaway}</li>
+                                                <li>oddhome: ${ou.oddhome}</li>
+                                            </ul>
+                                            <br/>
+                                        `;
+                                        })
+                                    }
+                                    html += `</td>`
+                                }
+
+                                if (match.firstmatch) {
+                                    html += `<td>`
+                                    if (match.firstmatch['1X2']) {
+                                        html += `
+                                                1X2:<br/>
+                                                1: ${match.firstmatch['1X2']['1']}<br/>
+                                                2: ${match.firstmatch['1X2']['2']}<br/>
+                                                X: ${match.firstmatch['1X2']['X']}<br/><br/><br/>
+                                    `;
+                                    }
+                                    if (match.firstmatch.hdp.length > 0) {
+                                        html += `HDP:<br/>`;
+                                        match.firstmatch.hdp.map(hdp => {
+                                            html += `
+                                            <ul>
+                                                <li>Goal: ${hdp.goal}</li>
+                                                <li>oddaway: ${hdp.oddaway}</li>
+                                                <li>oddhome: ${hdp.oddhome}</li>
+                                            </ul>
+                                            <br/>
+                                        `;
+                                        })
+                                    }
+                                    if (match.firstmatch.ou.length > 0) {
+                                        html += `<br/><br/>OU:<br/>`
+                                        match.firstmatch.ou.map(ou => {
+                                            html += `
+                                            <ul>
+                                                <li>Goal: ${ou.goal}</li>
+                                                <li>oddaway: ${ou.oddaway}</li>
+                                                <li>oddhome: ${ou.oddhome}</li>
+                                            </ul>
+                                            <br/>
+                                        `;
+                                        })
+                                    }
+                                    html += `</td>`;
+                                }
+                                html += `</tr></table>`
+                                console.log(html)
+                            })
                         }
+                        $("#table-data").html('');
+                        $("#table-data").html(html);
                     }
+
+
                 }
             }
 

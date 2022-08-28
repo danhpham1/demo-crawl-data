@@ -39,8 +39,8 @@
                 type="button" role="tab" aria-controls="p88-tab-pane" aria-selected="false">p88</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="5566688-tab" data-bs-toggle="tab" data-bs-target="#5566688-tab-pane"
-                type="button" role="tab" aria-controls="5566688-tab-pane" aria-selected="false">5566688</button>
+            <button class="nav-link" id="web5566688-tab" data-bs-toggle="tab" data-bs-target="#web5566688-tab-pane"
+                type="button" role="tab" aria-controls="web5566688-tab-pane" aria-selected="false">web5566688</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -49,6 +49,8 @@
         <div class="tab-pane fade" id="hga030-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         </div>
         <div class="tab-pane fade" id="p88-tab-pane" role="tabpanel" aria-labelledby="p88-tab" tabindex="0">
+        </div>
+        <div class="tab-pane fade" id="web5566688-tab-pane" role="tabpanel" aria-labelledby="web5566688-tab" tabindex="0">
         </div>
     </div>
     <div id="table-data">
@@ -65,12 +67,12 @@
     <script>
         $(document).ready(async function () {
             const printData = async () => {
-                while (true) {
+                // while (true) {
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
                     let htmlP88 = ``;
-                    let html5566688 = ``;
+                    let htmlweb5566688 = ``;
                     if (result.data.data) {
                         if (result.data.data.length > 0) {
                             result.data.data.map(match => {
@@ -95,7 +97,7 @@
                                                 X: ${match.fullmatch['1X2']['X']}<br/><br/><br/>
                                     `;
                                     }
-                                    if (match.fullmatch.hdp.length > 0) {
+                                    if (match.fullmatch.hdp && match.fullmatch.hdp.length > 0) {
                                         html += `HDP:<br/>`
                                         match.fullmatch.hdp.map(hdp => {
                                             html += `
@@ -108,7 +110,7 @@
                                         `;
                                         })
                                     }
-                                    if (match.fullmatch.ou.length > 0) {
+                                    if (match.fullmatch.ou && match.fullmatch.ou.length > 0) {
                                         html += `<br/><br/>OU:<br/>`
                                         match.fullmatch.ou.map(ou => {
                                             html += `
@@ -134,7 +136,7 @@
                                                 X: ${match.firstmatch['1X2']['X']}<br/><br/><br/>
                                     `;
                                     }
-                                    if (match.firstmatch.hdp.length > 0) {
+                                    if (match.firstmatch.hdp && match.firstmatch.hdp.length > 0) {
                                         html += `HDP:<br/>`;
                                         match.firstmatch.hdp.map(hdp => {
                                             html += `
@@ -147,7 +149,7 @@
                                         `;
                                         })
                                     }
-                                    if (match.firstmatch.ou.length > 0) {
+                                    if (match.firstmatch.ou && match.firstmatch.ou.length > 0) {
                                         html += `<br/><br/>OU:<br/>`
                                         match.firstmatch.ou.map(ou => {
                                             html += `
@@ -168,7 +170,7 @@
                                 } else if (match.webname == 'isn99') {
                                     htmlIsn99 += html;
                                 } else if (match.webname == '5566688'){
-                                    html5566688 += html;
+                                    htmlweb5566688 += html;
                                 } else {
                                     htmlP88 += html;
                                 }
@@ -177,25 +179,26 @@
                         $("#isn99-tab-pane").html('');
                         $("#hga030-tab-pane").html('');
                         $("#p88-tab-pane").html('');
+                        $("#web5566688-tab-pane").html('');
                         $("#isn99-tab-pane").html(htmlIsn99);
                         $("#hga030-tab-pane").html(htmlHga030);
                         $("#p88-tab-pane").html(htmlP88);
-                        $("#5566688-tab-pane").html(html5566688);
+                        $("#web5566688-tab-pane").html(htmlweb5566688);
                     }
 
 
-                }
+                // }
             }
 
-            const runData = async () => {
-                try {
-                    await printData();
-                } catch (error) {
-                    runData();
-                }
-            }
-
-            runData();
+            // const runData = async () => {
+            //     try {
+            //         await printData();
+            //     } catch (error) {
+            //         runData();
+            //     }
+            // }
+            printData();
+            // runData();
         })
     </script>
 </body>

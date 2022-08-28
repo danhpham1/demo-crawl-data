@@ -38,6 +38,10 @@
             <button class="nav-link" id="p88-tab" data-bs-toggle="tab" data-bs-target="#p88-tab-pane"
                 type="button" role="tab" aria-controls="p88-tab-pane" aria-selected="false">p88</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="5566688-tab" data-bs-toggle="tab" data-bs-target="#5566688-tab-pane"
+                type="button" role="tab" aria-controls="5566688-tab-pane" aria-selected="false">5566688</button>
+        </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="isn99-tab-pane" role="tabpanel" aria-labelledby="isn99-tab"
@@ -66,6 +70,7 @@
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
                     let htmlP88 = ``;
+                    let html5566688 = ``;
                     if (result.data.data) {
                         if (result.data.data.length > 0) {
                             result.data.data.map(match => {
@@ -162,6 +167,8 @@
                                     htmlHga030 += html;
                                 } else if (match.webname == 'isn99') {
                                     htmlIsn99 += html;
+                                } else if (match.webname == '5566688'){
+                                    html5566688 += html;
                                 } else {
                                     htmlP88 += html;
                                 }
@@ -173,6 +180,7 @@
                         $("#isn99-tab-pane").html(htmlIsn99);
                         $("#hga030-tab-pane").html(htmlHga030);
                         $("#p88-tab-pane").html(htmlP88);
+                        $("#5566688-tab-pane").html(html5566688);
                     }
 
 

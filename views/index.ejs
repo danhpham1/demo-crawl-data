@@ -72,6 +72,7 @@
             }
             const printData = async () => {
                 while (true) {
+                    await delay(2000)
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
@@ -97,9 +98,9 @@
                                     if (match.fullmatch['1X2']) {
                                         html += `
                                                 1X2:<br/>
-                                                <span data-fullmatch-${match.webname}-1=${match.fullmatch['1X2']['1']} style="color:${$($(`span[data-fullmatch-${match.webname}-1]`)[i]).data(`fullmatch-${match.webname}-1`) == match.fullmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.fullmatch['1X2']['1']}</span><br/>
-                                                <span data-fullmatch-${match.webname}-2=${match.fullmatch['1X2']['2']} style="color:${$($(`span[data-fullmatch-${match.webname}-2]`)[i]).data(`fullmatch-${match.webname}-2`) == match.fullmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.fullmatch['1X2']['2']}</span><br/>
-                                                <span data-fullmatch-${match.webname}-x=${match.fullmatch['1X2']['X']} style="color:${$($(`span[data-fullmatch-${match.webname}-x]`)[i]).data(`fullmatch-${match.webname}-x`) == match.fullmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.fullmatch['1X2']['X']}</span><br/><br/><br/>
+                                                <span data-fullmatch-${match.webname}-1-${i}=${match.fullmatch['1X2']['1']} style="color:${$($(`span[data-fullmatch-${match.webname}-1-${i}]`)[0]).data(`fullmatch-${match.webname}-1-${i}`) == match.fullmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.fullmatch['1X2']['1']}</span><br/>
+                                                <span data-fullmatch-${match.webname}-2-${i}=${match.fullmatch['1X2']['2']} style="color:${$($(`span[data-fullmatch-${match.webname}-2-${i}]`)[0]).data(`fullmatch-${match.webname}-2-${i}`) == match.fullmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.fullmatch['1X2']['2']}</span><br/>
+                                                <span data-fullmatch-${match.webname}-x-${i}=${match.fullmatch['1X2']['X']} style="color:${$($(`span[data-fullmatch-${match.webname}-x-${i}]`)[0]).data(`fullmatch-${match.webname}-x-${i}`) == match.fullmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.fullmatch['1X2']['X']}</span><br/><br/><br/>
                                     `;
                                     }
                                     if (match.fullmatch.hdp && match.fullmatch.hdp.length > 0) {
@@ -136,9 +137,9 @@
                                     if (match.firstmatch['1X2']) {
                                         html += `
                                                 1X2:<br/>
-                                                <span data-firstmatch-${match.webname}-1=${match.firstmatch['1X2']['1']} style="color:${$($(`span[data-firstmatch-${match.webname}-1]`)[i]).data(`firstmatch-${match.webname}-1`) == match.firstmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.firstmatch['1X2']['1']}</span><br/>
-                                                <span data-firstmatch-${match.webname}-2=${match.firstmatch['1X2']['2']} style="color:${$($(`span[data-firstmatch-${match.webname}-2]`)[i]).data(`firstmatch-${match.webname}-2`) == match.firstmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.firstmatch['1X2']['2']}</span><br/>
-                                                <span data-firstmatch-${match.webname}-x=${match.firstmatch['1X2']['X']} style="color:${$($(`span[data-firstmatch-${match.webname}-x]`)[i]).data(`firstmatch-${match.webname}-x`) == match.firstmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.firstmatch['1X2']['X']}</span><br/><br/><br/>
+                                                <span data-firstmatch-${match.webname}-1-${i}=${match.firstmatch['1X2']['1']} style="color:${$($(`span[data-firstmatch-${match.webname}-1-${i}]`)[0]).data(`firstmatch-${match.webname}-1-${i}`) == match.firstmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.firstmatch['1X2']['1']}</span><br/>
+                                                <span data-firstmatch-${match.webname}-2-${i}=${match.firstmatch['1X2']['2']} style="color:${$($(`span[data-firstmatch-${match.webname}-2-${i}]`)[0]).data(`firstmatch-${match.webname}-2-${i}`) == match.firstmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.firstmatch['1X2']['2']}</span><br/>
+                                                <span data-firstmatch-${match.webname}-x-${i}=${match.firstmatch['1X2']['X']} style="color:${$($(`span[data-firstmatch-${match.webname}-x-${i}]`)[0]).data(`firstmatch-${match.webname}-x-${i}`) == match.firstmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.firstmatch['1X2']['X']}</span><br/><br/><br/>
                                     `;
                                     }
                                     if (match.firstmatch.hdp && match.firstmatch.hdp.length > 0) {
@@ -202,8 +203,8 @@
                     runData();
                 }
             }
-            // printData();
-            // printData();
+            // await printData();
+            // await printData();
             // printData();
             runData();
         })

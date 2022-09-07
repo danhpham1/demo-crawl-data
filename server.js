@@ -21,6 +21,19 @@ app.get("/", async (req, res) => {
     }
 })
 
+app.get("/backup", async (req, res) => {
+    await mongoose.connect("mongodb://localhost:27017/pet",
+        {
+            useNewUrlParser: true,
+        },
+    )
+    try {
+        res.render('backup');
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 app.get("/data", async (req, res) => {
     const gameListCollection = mongoose.connection.db.collection('pet');
     const gameLists = await gameListCollection.find({}).toArray();

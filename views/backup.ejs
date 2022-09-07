@@ -67,7 +67,7 @@
     <script>
         $(document).ready(async function () {
             const printData = async () => {
-                // while (true) {
+                while (true) {
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
@@ -187,18 +187,18 @@
                     }
 
 
-                // }
+                }
             }
 
-            // const runData = async () => {
-            //     try {
-            //         await printData();
-            //     } catch (error) {
-            //         runData();
-            //     }
-            // }
-            printData();
-            // runData();
+            const runData = async () => {
+                try {
+                    await printData();
+                } catch (error) {
+                    runData();
+                }
+            }
+            // printData();
+            runData();
         })
     </script>
 </body>

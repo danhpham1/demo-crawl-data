@@ -35,8 +35,8 @@
                 type="button" role="tab" aria-controls="hga030-tab-pane" aria-selected="false">hga030</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="p88-tab" data-bs-toggle="tab" data-bs-target="#p88-tab-pane" type="button"
-                role="tab" aria-controls="p88-tab-pane" aria-selected="false">p88</button>
+            <button class="nav-link" id="p88-tab" data-bs-toggle="tab" data-bs-target="#p88-tab-pane"
+                type="button" role="tab" aria-controls="p88-tab-pane" aria-selected="false">p88</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="web5566688-tab" data-bs-toggle="tab" data-bs-target="#web5566688-tab-pane"
@@ -50,8 +50,7 @@
         </div>
         <div class="tab-pane fade" id="p88-tab-pane" role="tabpanel" aria-labelledby="p88-tab" tabindex="0">
         </div>
-        <div class="tab-pane fade" id="web5566688-tab-pane" role="tabpanel" aria-labelledby="web5566688-tab"
-            tabindex="0">
+        <div class="tab-pane fade" id="web5566688-tab-pane" role="tabpanel" aria-labelledby="web5566688-tab" tabindex="0">
         </div>
     </div>
     <div id="table-data">
@@ -67,12 +66,8 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(async function () {
-            const delay = (time) => {
-                return new Promise(resolve => setTimeout(resolve, time));
-            }
             const printData = async () => {
-                while (true) {
-                    await delay(1000);
+                // while (true) {
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
@@ -80,7 +75,7 @@
                     let htmlweb5566688 = ``;
                     if (result.data.data) {
                         if (result.data.data.length > 0) {
-                            result.data.data.map((match, i) => {
+                            result.data.data.map(match => {
                                 let html = `<table><tr><td>Info Match</td><td>Full Match</td><td>Firs Match</td></tr><tr>`;
                                 if (match.infomatch) {
                                     html += `
@@ -89,7 +84,6 @@
                                             namehome: ${match.infomatch.namehome} <br/>
                                             score: ${match.infomatch.score} <br/>
                                             time: ${match.infomatch.time} <br/>
-                                            time save: ${match.createdAt} <br/>
                                         </td>
                                 `;
                                 }
@@ -98,19 +92,19 @@
                                     if (match.fullmatch['1X2']) {
                                         html += `
                                                 1X2:<br/>
-                                                <span data-fullmatch-${match.webname}-1=${match.fullmatch['1X2']['1']} style="color:${$($(`span[data-fullmatch-${match.webname}-1]`)[i]).data(`fullmatch-${match.webname}-1`) == match.fullmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.fullmatch['1X2']['1']}</span><br/>
-                                                <span data-fullmatch-${match.webname}-2=${match.fullmatch['1X2']['2']} style="color:${$($(`span[data-fullmatch-${match.webname}-2]`)[i]).data(`fullmatch-${match.webname}-2`) == match.fullmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.fullmatch['1X2']['2']}</span><br/>
-                                                <span data-fullmatch-${match.webname}-x=${match.fullmatch['1X2']['X']} style="color:${$($(`span[data-fullmatch-${match.webname}-x]`)[i]).data(`fullmatch-${match.webname}-x`) == match.fullmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.fullmatch['1X2']['X']}</span><br/><br/><br/>
+                                                1: ${match.fullmatch['1X2']['1']}<br/>
+                                                2: ${match.fullmatch['1X2']['2']}<br/>
+                                                X: ${match.fullmatch['1X2']['X']}<br/><br/><br/>
                                     `;
                                     }
                                     if (match.fullmatch.hdp && match.fullmatch.hdp.length > 0) {
                                         html += `HDP:<br/>`
-                                        match.fullmatch.hdp.map((hdp, index) => {
+                                        match.fullmatch.hdp.map(hdp => {
                                             html += `
                                             <ul>
-                                                <li data-fullmatch-hdp-goal-${match.webname}-${i}=${hdp.goal} style="color:${$($(`li[data-fullmatch-hdp-goal-${match.webname}-${i}]`)[0]).data(`fullmatch-hdp-goal-${match.webname}-${i}`) == hdp.goal ? 'black' : 'red'}">Goal: ${hdp.goal}</li>
-                                                <li data-fullmatch-hdp-oddaway-${match.webname}-${i}=${hdp.oddaway} style="color:${$($(`li[data-fullmatch-hdp-oddaway-${match.webname}-${i}]`)[0]).data(`fullmatch-hdp-oddaway-${match.webname}-${i}`) == hdp.oddaway ? 'black' : 'red'}">oddaway: ${hdp.oddaway}</li>
-                                                <li data-fullmatch-hdp-oddhome-${match.webname}-${i}=${hdp.oddhome} style="color:${$($(`li[data-fullmatch-hdp-oddhome-${match.webname}-${i}]`)[0]).data(`fullmatch-hdp-oddhome-${match.webname}-${i}`) == hdp.oddhome ? 'black' : 'red'}">oddhome: ${hdp.oddhome}</li>
+                                                <li>Goal: ${hdp.goal}</li>
+                                                <li>oddaway: ${hdp.oddaway}</li>
+                                                <li>oddhome: ${hdp.oddhome}</li>
                                             </ul>
                                             <br/>
                                         `;
@@ -118,12 +112,12 @@
                                     }
                                     if (match.fullmatch.ou && match.fullmatch.ou.length > 0) {
                                         html += `<br/><br/>OU:<br/>`
-                                        match.fullmatch.ou.map((ou, index) => {
+                                        match.fullmatch.ou.map(ou => {
                                             html += `
                                             <ul>
-                                                <li data-fullmatch-ou-goal-${match.webname}-${i}=${ou.goal} style="color:${$($(`li[data-fullmatch-ou-goal-${match.webname}-${i}]`)[0]).data(`fullmatch-ou-goal-${match.webname}-${i}`) == ou.goal ? 'black' : 'red'}">Goal: ${ou.goal}</li>
-                                                <li data-fullmatch-ou-oddaway-${match.webname}-${i}=${ou.oddaway} style="color:${$($(`li[data-fullmatch-ou-oddaway-${match.webname}-${i}]`)[0]).data(`fullmatch-ou-oddaway-${match.webname}-${i}`) == ou.oddaway ? 'black' : 'red'}">oddaway: ${ou.oddaway}</li>
-                                                <li data-fullmatch-ou-oddhome-${match.webname}-${i}=${ou.oddhome} style="color:${$($(`li[data-fullmatch-ou-oddhome-${match.webname}-${i}]`)[0]).data(`fullmatch-ou-oddhome-${match.webname}-${i}`) == ou.oddhome ? 'black' : 'red'}">oddhome: ${ou.oddhome}</li>
+                                                <li>Goal: ${ou.goal}</li>
+                                                <li>oddaway: ${ou.oddaway}</li>
+                                                <li>oddhome: ${ou.oddhome}</li>
                                             </ul>
                                             <br/>
                                         `;
@@ -137,19 +131,19 @@
                                     if (match.firstmatch['1X2']) {
                                         html += `
                                                 1X2:<br/>
-                                                <span data-firstmatch-${match.webname}-1=${match.firstmatch['1X2']['1']} style="color:${$($(`span[data-firstmatch-${match.webname}-1]`)[i]).data(`firstmatch-${match.webname}-1`) == match.firstmatch['1X2']['1'] ? 'black' : 'red'}">1: ${match.firstmatch['1X2']['1']}</span><br/>
-                                                <span data-firstmatch-${match.webname}-2=${match.firstmatch['1X2']['2']} style="color:${$($(`span[data-firstmatch-${match.webname}-2]`)[i]).data(`firstmatch-${match.webname}-2`) == match.firstmatch['1X2']['2'] ? 'black' : 'red'}">2: ${match.firstmatch['1X2']['2']}</span><br/>
-                                                <span data-firstmatch-${match.webname}-x=${match.firstmatch['1X2']['X']} style="color:${$($(`span[data-firstmatch-${match.webname}-x]`)[i]).data(`firstmatch-${match.webname}-x`) == match.firstmatch['1X2']['X'] ? 'black' : 'red'}">X: ${match.firstmatch['1X2']['X']}</span><br/><br/><br/>
+                                                1: ${match.firstmatch['1X2']['1']}<br/>
+                                                2: ${match.firstmatch['1X2']['2']}<br/>
+                                                X: ${match.firstmatch['1X2']['X']}<br/><br/><br/>
                                     `;
                                     }
                                     if (match.firstmatch.hdp && match.firstmatch.hdp.length > 0) {
                                         html += `HDP:<br/>`;
-                                        match.firstmatch.hdp.map((hdp, index) => {
+                                        match.firstmatch.hdp.map(hdp => {
                                             html += `
                                             <ul>
-                                                <li data-firstmatch-hdp-goal-${match.webname}-${i}=${hdp.goal} style="color:${$($(`li[data-firstmatch-hdp-goal-${match.webname}-${i}]`)[0]).data(`firstmatch-hdp-goal-${match.webname}-${i}`) == hdp.goal ? 'black' : 'red'}">Goal: ${hdp.goal}</li>
-                                                <li data-firstmatch-hdp-oddaway-${match.webname}-${i}=${hdp.oddaway} style="color:${$($(`li[data-firstmatch-hdp-oddaway-${match.webname}-${i}]`)[0]).data(`firstmatch-hdp-oddaway-${match.webname}-${i}`) == hdp.oddaway ? 'black' : 'red'}">oddaway: ${hdp.oddaway}</li>
-                                                <li data-firstmatch-hdp-oddhome-${match.webname}-${i}=${hdp.oddhome} style="color:${$($(`li[data-firstmatch-hdp-oddhome-${match.webname}-${i}]`)[0]).data(`firstmatch-hdp-oddhome-${match.webname}-${i}`) == hdp.oddhome ? 'black' : 'red'}">oddhome: ${hdp.oddhome}</li>
+                                                <li>Goal: ${hdp.goal}</li>
+                                                <li>oddaway: ${hdp.oddaway}</li>
+                                                <li>oddhome: ${hdp.oddhome}</li>
                                             </ul>
                                             <br/>
                                         `;
@@ -157,12 +151,12 @@
                                     }
                                     if (match.firstmatch.ou && match.firstmatch.ou.length > 0) {
                                         html += `<br/><br/>OU:<br/>`
-                                        match.firstmatch.ou.map((ou, index) => {
+                                        match.firstmatch.ou.map(ou => {
                                             html += `
                                             <ul>
-                                                <li data-firstmatch-ou-goal-${match.webname}-${i}=${ou.goal} style="color:${$($(`li[data-firstmatch-ou-goal-${match.webname}-${i}]`)[0]).data(`firstmatch-ou-goal-${match.webname}-${i}`) == ou.goal ? 'black' : 'red'}">Goal: ${ou.goal}</li>
-                                                <li data-firstmatch-ou-oddaway-${match.webname}-${i}=${ou.oddaway} style="color:${$($(`li[data-firstmatch-ou-oddaway-${match.webname}-${i}]`)[0]).data(`firstmatch-ou-oddaway-${match.webname}-${i}`) == ou.oddaway ? 'black' : 'red'}">oddaway: ${ou.oddaway}</li>
-                                                <li data-firstmatch-ou-oddhome-${match.webname}-${i}=${ou.oddhome} style="color:${$($(`li[data-firstmatch-ou-oddhome-${match.webname}-${i}]`)[0]).data(`firstmatch-ou-oddhome-${match.webname}-${i}`) == ou.oddhome ? 'black' : 'red'}">oddhome: ${ou.oddhome}</li>
+                                                <li>Goal: ${ou.goal}</li>
+                                                <li>oddaway: ${ou.oddaway}</li>
+                                                <li>oddhome: ${ou.oddhome}</li>
                                             </ul>
                                             <br/>
                                         `;
@@ -171,11 +165,11 @@
                                     html += `</td>`;
                                 }
                                 html += `</tr></table>`;
-                                if (match.webname == 'hga030') {
+                                if(match.webname == 'hga030'){
                                     htmlHga030 += html;
                                 } else if (match.webname == 'isn99') {
                                     htmlIsn99 += html;
-                                } else if (match.webname == '5566688') {
+                                } else if (match.webname == '5566688'){
                                     htmlweb5566688 += html;
                                 } else {
                                     htmlP88 += html;
@@ -193,20 +187,18 @@
                     }
 
 
-                }
+                // }
             }
 
-            const runData = async () => {
-                try {
-                    await printData();
-                } catch (error) {
-                    runData();
-                }
-            }
-            // printData();
-            // printData();
-            // printData();
-            runData();
+            // const runData = async () => {
+            //     try {
+            //         await printData();
+            //     } catch (error) {
+            //         runData();
+            //     }
+            // }
+            printData();
+            // runData();
         })
     </script>
 </body>

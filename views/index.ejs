@@ -71,7 +71,13 @@
                 return new Promise(resolve => setTimeout(resolve, time));
             }
             const printData = async () => {
+                let isFirst = true;
                 while (true) {
+                    if(!isFirst){
+                        await delay(1000);
+                    } else {
+                        isFirst = false;
+                    }
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
@@ -184,8 +190,8 @@
                                     htmlIsn99 += html;
                                     if(isFirstMatchIsn99){
                                         isFirstMatchIsn99 = false;
-                                        $('#isn99-tab-pane').html('');
-                                        $('#isn99-tab-pane').html(match.createdAt);
+                                        $('#time-isn99').html('');
+                                        $('#time-isn99').html(match.createdAt);
                                     }
                                 } else if (match.webname == '5566688') {
                                     htmlweb5566688 += html;

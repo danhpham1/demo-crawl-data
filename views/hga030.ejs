@@ -73,11 +73,11 @@
             const printData = async () => {
                 let isFirst = true;
                 while (true) {
-                    if(!isFirst){
-                        await delay(1000);
-                    } else {
-                        isFirst = false;
-                    }
+                    // if(!isFirst){
+                    //     await delay(1000);
+                    // } else {
+                    //     isFirst = false;
+                    // }
                     const result = await axios.get('/data');
                     let htmlHga030 = ``;
                     let htmlIsn99 = ``;
